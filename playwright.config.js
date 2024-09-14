@@ -12,7 +12,8 @@ module.exports = defineConfig({
   use: {
     browserName: 'chromium',
     headless: false, // Headless mod kapalı, tarayıcı görünür olacak
-
+    screenshot: 'on',
+    trace: 'retain-on-failure' //off, on
   },
 
 });

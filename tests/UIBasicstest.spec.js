@@ -13,7 +13,7 @@ test('Page Playwright Test', async ({ browser }) => {
     await expect(page).toHaveTitle("Google");
 });
 
-test('Browser Context Playwright Test', async ({ page }) => {
+test.only('Browser Context Playwright Test', async ({ page }) => {
     const userName = page.locator('#username');
     const password = page.locator("[type='password']");
     const signinButton = page.locator("#signInBtn");
@@ -29,8 +29,10 @@ test('Browser Context Playwright Test', async ({ page }) => {
 
     await userName.fill("rahulshettyacademy");
     await signinButton.click();
+    await page.pause();
 
     const newPageTitle = "ProtoCommerce";
+    
     //THIS DOESN'T WORK
     //await page.waitForLoadState('networkidle');
 
@@ -63,7 +65,7 @@ test('Grab Titles', async ({ page }) => {
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
     await userName.fill("rahulshettyacademy");
     await password.fill("learning");
-    await signinButton.click();
+    await signinButton.click();    
 
     // WAIT DID NOT WORK WITH THE FOLLOWING CODE
     //await page.waitForLoadState('networkidle');
@@ -71,7 +73,13 @@ test('Grab Titles', async ({ page }) => {
     //But the above wait code worked in the next test site
     //Maybe because that site is written in microservice architecture
 
-    await page.locator(".card-body a").first().waitFor();
+    //4 title'dan ilkinin görünür olmasını bekleme satırı ile sorunu çözdük:
+    //await page.locator(".card-body a").first().waitFor();
+
+    //diğer bir çözüm:
+    await page.waitForSelector('.card-body a'); 
+
+
     //Print all titles
     const allTitles = await cardTitles.allTextContents();
     console.log(allTitles);
@@ -107,7 +115,7 @@ test('Dropdown select controls', async ({ page }) => {
     await expect(documentLink).toHaveClass('blinkingText');
     //await page.pause();
 });
-test.only('Child windoes handle', async ({ browser }) => {
+test('Child windoes handle', async ({ browser }) => {
 
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -147,5 +155,5 @@ test.only('Child windoes handle', async ({ browser }) => {
     //console.log(await userName.textContent());
     const userNameValue = await userName.inputValue();
     console.log(userNameValue);
-    await page.pause();
+    
 });
