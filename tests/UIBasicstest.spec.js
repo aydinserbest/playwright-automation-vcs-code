@@ -13,7 +13,7 @@ test('Page Playwright Test', async ({ browser }) => {
     await expect(page).toHaveTitle("Google");
 });
 
-test.only('Browser Context Playwright Test', async ({ page }) => {
+test('Browser Context Playwright Test', async ({ page }) => {
     const userName = page.locator('#username');
     const password = page.locator("[type='password']");
     const signinButton = page.locator("#signInBtn");
@@ -78,6 +78,7 @@ test('Grab Titles', async ({ page }) => {
 
     //diğer bir çözüm:
     await page.waitForSelector('.card-body a'); 
+    await page.pause();
 
 
     //Print all titles
@@ -94,7 +95,7 @@ test('titles await', async ({ page }) => {
     console.log(await page.locator(".card-body b").allTextContents());
 });
 
-test('Dropdown select controls', async ({ page }) => {
+test.only('Dropdown select controls', async ({ page }) => {
     const userName = page.locator('#username');
     const password = page.locator("[type='password']");
     const signinButton = page.locator("#signInBtn");
@@ -105,6 +106,7 @@ test('Dropdown select controls', async ({ page }) => {
     await page.locator('label.customradio:has-text("User")').click();
     await page.locator("#okayBtn").click();
     console.log(await page.locator('label.customradio:has-text("User")').isChecked());
+    await page.pause();
     await expect(page.locator('label.customradio:has-text("User")')).toBeChecked();
     const dropDown = page.locator("select.form-control");
     await dropDown.selectOption("consult");
@@ -121,6 +123,8 @@ test('Child windoes handle', async ({ browser }) => {
     const page = await context.newPage();
     const userName = page.locator('#username');
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+    const firstTitle = await page.title();
+    console.log(firstTitle);
     const documentLink = page.locator("[href*='rahulshettyacademy']");
 
     const [newPage] = await Promise.all([
@@ -140,7 +144,7 @@ test('Child windoes handle', async ({ browser }) => {
     console.log(text);
     if (text !== null) {
         const arrayText = text.split("@");
-        email = arrayText[1].split(" ")[0];
+        email = arrayText[1]?.split(" ")[0];
         console.log(email);
     } else {
 

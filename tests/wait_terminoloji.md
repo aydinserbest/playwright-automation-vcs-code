@@ -4,6 +4,9 @@ ajax ve wait konusunun anhtar kısmı: elementin DOM'a yerleşip yerleşmediği
 From the testing perspective" (test perspektifinden bakıldığında) ifadesi:
 
 
+The most common false alarm is “the test script didn’t wait long enough for an AJAX operation to complete
+
+
 
 Klasik Web Uygulamalarında Sayfa Yenilenmesi Nedir?
 Eskiden, bir kullanıcı bir web sayfasında bir eylem (butona tıklama, form gönderme, linke tıklama gibi) gerçekleştirdiğinde, tüm sayfa sunucudan tekrar yüklenirdi. Tarayıcı önce mevcut sayfayı boşaltır, ardından yeni verilerle dolu sayfayı yeniden yüklerdi. Bu işlem şu adımları içerir:
