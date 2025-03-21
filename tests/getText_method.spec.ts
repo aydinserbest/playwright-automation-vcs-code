@@ -3,10 +3,11 @@ import { test, expect } from '@playwright/test'
 // First, retrieve the updated text from the button and then validate it.
 test('Retrieve and validate updated button text', async ({ page }) => {
     await page.goto('http://uitestingplayground.com/textinput')
+    //change the button name
     await page.getByPlaceholder('MyButton').fill('Save')
     await page.getByRole('button', { name: "Button That Should Change it's Name Based on Input Value" }).click()
 
-    // We use getByText to retrieve the updated text from the button.
+    // We use getByText to locate the button and then use textContent() to retrieve the updated text.
     const updatedText = await page.getByText("Save").textContent();
 
     // Assert to verify that the button text has changed successfully.
@@ -31,6 +32,9 @@ test('Verify button text change directly', async ({ page }) => {
     // but in the HTML, it is stored as "Submit" with normal capitalization.
     // Playwright's getByRole() and getByText() match based on the visible text in the UI, 
     // so both "Submit" and "SUBMIT" work for assertions.
+
+    //*** the 2 tests below, are about the difference between the value in the HTML and the value in the UI
+    //*** The button text appears in uppercase due to CSS styles like text-transform: uppercase;
 
 test('Verify button text with getByRole', async ({ page }) => {
     // Navigate to the target webpage

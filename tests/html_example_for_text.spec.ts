@@ -17,11 +17,12 @@ test.beforeEach(async ({ page, testInfo }) => {
         await page.goto('file:///Users/freefree/Desktop/getText-examples.html');
     }
 });
-
+//1- textContent() method
 test('get text with textContent', async ({ page }) => {
     const text = await page.locator('#text-content-example').textContent()
     console.log(text)
 })
+//2- innerText() method
 test('innerText', async ({ page }) => {
     // innerText() retrieves the text as it appears on the screen.
     // If CSS modifies the text (e.g., text-transform: uppercase), innerText() reflects this change.
@@ -34,6 +35,7 @@ test('innerText', async ({ page }) => {
     const text2 = await page.locator('#inner-text-example').textContent()
     console.log(text2)
 })
+//3-inputValue()
 test('Retrieve input field value using inputValue()', async ({ page }) => {
     const inputLocate = page.locator('#username')
     // The input field has a predefined value: "JohnDoe"
@@ -48,6 +50,7 @@ test('Retrieve input field value using inputValue()', async ({ page }) => {
     // Assert to verify the input field value has changed successfully
     expect(updatedText).toEqual('Mike Bouwer');
 })
+//4- getAttribute()
 test('Retrieve default input value using getAttribute', async ({ page }) => {
     // Locate the input field
     const emailInput = page.locator('#default-email');
@@ -62,6 +65,7 @@ test('Retrieve default input value using getAttribute', async ({ page }) => {
     // Assert that the retrieved value matches the default set in HTML
     await expect(defaultValue).toEqual('example@gmail.com');
 })
+//4- getAttribute()
 test('getAttribute', async ({ page }) => {
     await page.goto('http://uitestingplayground.com/textinput')
     const basicFormButton = page.locator('#updatingButton')
@@ -70,6 +74,7 @@ test('getAttribute', async ({ page }) => {
 
 
 })
+//5- allTextContents()
 test('Retrieve multiple texts using allTextContents()', async ({ page }) => {
     await page.goto('file:///Users/freefree/Desktop/getText-examples.html');
     //Retrieve the text contents of all elements with the `.menu-item` class.
@@ -87,9 +92,9 @@ test('Retrieve multiple texts using allTextContents()', async ({ page }) => {
     // Unlike locator-based assertions, these are **general assertions** that work with regular JavaScript values (like arrays and strings), not Promises.
     /*
     Why don’t we use await?
-	•	In the line menuItems = await page.locator('.menu-item').allTextContents();, we use await to resolve the Promise.
-	•	As a result, menuItems is no longer a Promise; it becomes a regular JavaScript array.
-	•	Assertions with expect() only check values and do not work with Promises.
+    •	In the line menuItems = await page.locator('.menu-item').allTextContents();, we use await to resolve the Promise.
+    •	As a result, menuItems is no longer a Promise; it becomes a regular JavaScript array.
+    •	Assertions with expect() only check values and do not work with Promises.
 
     Therefore, await is only necessary for operations that return a Promise. 
     Since menuItems is already a resolved array, await is not needed here.
