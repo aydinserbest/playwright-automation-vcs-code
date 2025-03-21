@@ -63,7 +63,7 @@ test('Retrieve default input value using getAttribute', async ({ page }) => {
 
 
     // Assert that the retrieved value matches the default set in HTML
-    await expect(defaultValue).toEqual('example@gmail.com');
+    expect(defaultValue).toEqual('example@gmail.com');
 })
 //4- getAttribute()
 test('getAttribute', async ({ page }) => {
